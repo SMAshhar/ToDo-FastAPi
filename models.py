@@ -1,17 +1,25 @@
-from sqlalchemy import Column, Integer, String
 from database import Base
+from sqlalchemy import Column, Integer, String, Boolean
+
 
 class Todo(Base):
-    __tablename__ = 'todos'
-    id = Column(Integer, primary_key=True, index=True)
-    description = Column(String(256))
-    status = Column(String(256))
-    priority = Column(String(256))
-    due_date = Column(String(256))
-    created_at = Column(String(256))
-    updated_at = Column(String(256))
-    deleted_at = Column(String(256))
-    user_id = Column(Integer)
-    def __repr__(self):
-        return '<Todo %r>' % (self.description)
+    """
+    A class representing a todo item.
     
+    """
+    __tablename__ = "todos"
+
+    id = Column(Integer, primary_key=True)
+    text = Column(String)
+    is_done = Column(Boolean, default=False)
+
+class User(Base):
+    """
+    A class representing a user.
+    
+    """
+    __tablename__ = "users"
+
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String, unique=True)
+    hashed_password = Column(String)
